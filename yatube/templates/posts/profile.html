@@ -1,0 +1,47 @@
+{% load thumbnail %}
+<html lang="ru"> 
+  <head>  
+    <!-- Подключены иконки, стили и заполенены мета теги -->
+    <title>{{ author.get_full_name}} </title>
+  </head>
+  <body>       
+    <header>
+      <nav class="navbar navbar-light" style="background-color: lightskyblue">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <img src="/static/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span style="color:red">Ya</span>tube
+          </a>
+        </div>
+      </nav>      
+    </header>
+    <main>
+      <div class="container py-5">        
+        <h1> все посты пользователя {{ author.get_full_name }} <!--Лев Толстой--> </h1>
+        <h3>Всего постов: {{ count_of_username }}<!-- --> </h3>   
+        {% for post in page_obj %}
+  <ul>
+    <li>
+      Автор: {{ author.get_full_name }}
+    </li>
+    <li>
+      Дата публикации: {{ post.pub_date|date:"d E Y" }}
+    </li>
+  </ul>
+  <p>{{ post.text }}</p>  
+  {% if post.group %}
+  <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+  {% endif %}
+  <a href="{% url 'posts:post_detail' post.id %}">детали поста</a>
+  {% if not forloop.last %}<hr>{% endif %}
+{% endfor %}
+
+        <!-- Остальные посты. после последнего нет черты -->
+        <!-- Здесь подключён паджинатор -->{% include 'posts/includes/paginator.html' %}
+      </div>
+    </main>
+    <footer class="border-top text-center py-3">
+      <p>© <!--2021 --> Copyright <span style="color:red">Ya</span>tube</p>    
+    </footer>
+  </body>
+</html> 

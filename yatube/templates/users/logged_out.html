@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Вы вышли из системы{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 p-5">
+    <div class="card">
+        <style>
+           .text {
+           text-align:  center;
+           margin: 0 auto;
+           width: 500px}
+        </style>
+        <style>
+            p{border: 1px solid grey;
+               padding: 10px;}
+        </style>
+        <div class="text" style = "background: Silver;";>
+            <p>
+            Выход
+            </p>
+        </div>
+      <div class="text">
+        <p>
+          Вы вышли из своей учётной записи. Ждём вас снова!
+        </p>
+      </div> <!-- card body -->
+    </div> <!-- card -->
+  </div> <!-- col -->
+</div> <!-- row -->
+{% endblock %} 
