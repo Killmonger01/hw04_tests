@@ -1,6 +1,5 @@
 from http import HTTPStatus
 
-from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 
 from posts.models import Group, Post, User
@@ -29,7 +28,7 @@ class StaticURLTests(TestCase):
         for field, expected_value in pages.items():
             with self.subTest(field=field):
                 response = self.client.get(expected_value)
-                self.assertEqual(response.status_code,  HTTPStatus.OK)
+                self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_only_auth_page(self):
         pages = {
@@ -39,7 +38,7 @@ class StaticURLTests(TestCase):
         for field, expected_value in pages.items():
             with self.subTest(field=field):
                 response = self.author.get(expected_value)
-                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_urls_uses_correct_template(self):
         """URL-адрес использует соответствующий шаблон."""
