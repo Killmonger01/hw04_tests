@@ -1,8 +1,9 @@
-from django.test import TestCase, Client
-from django.contrib.auth import get_user_model
-from posts.models import Post, Group
+from http import HTTPStatus
 
-User = get_user_model()
+from django.contrib.auth import get_user_model
+from django.test import Client, TestCase
+
+from posts.models import Group, Post, User
 
 
 class StaticURLTests(TestCase):
@@ -17,12 +18,6 @@ class StaticURLTests(TestCase):
                                          description='тестовый дескриптор')
 
     def setUp(self):
-        # Устанавливаем данные для тестирования
-        # Создаём экземпляр клиента. Он неавторизован.
-        self.guest_client = Client()
-        self.user = User.objects.create(username='Testname2')
-        self.authorized_client = Client()
-        self.authorized_client.force_login(self.user)
         self.author = Client()
         self.author.force_login(self.author_user)
 
@@ -33,8 +28,8 @@ class StaticURLTests(TestCase):
                  'detail': f'/posts/{self.post.pk}/'}
         for field, expected_value in pages.items():
             with self.subTest(field=field):
-                response = self.guest_client.get(expected_value)
-                self.assertEqual(response.status_code, 200)
+                response = self.client.get(expected_value)
+                self.assertEqual(response.status_code,  HTTPStatus.OK)
 
     def test_only_auth_page(self):
         pages = {

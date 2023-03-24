@@ -2,9 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
-
-from .models import Post, Group, User
 from .forms import PostForm
+from .models import Group, Post, User
 from .utilits import page_paginator
 
 
