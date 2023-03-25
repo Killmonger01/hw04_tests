@@ -126,17 +126,17 @@ class PaginatorViewsTest(TestCase):
         )
 
     def test_first_page_contains(self):
-        PAGE_LIMIT = 10
+        page_limit = 10
         url_names = {
-            reverse('posts:index'): PAGE_LIMIT,
+            reverse('posts:index'): page_limit,
             reverse(
                 'posts:group_list',
                 kwargs={'slug': self.group.slug}
-            ): PAGE_LIMIT,
+            ): page_limit,
             reverse(
                 'posts:profile',
                 args=[self.user]
-            ): PAGE_LIMIT,
+            ): page_limit,
         }
         for value, expected in url_names.items():
             with self.subTest(value=value):
@@ -144,19 +144,19 @@ class PaginatorViewsTest(TestCase):
                 self.assertEqual(len(response.context['page_obj']), expected)
 
     def test_second_page_contains_three_records(self):
-        PAGE_LIMIT_SECOND_PAGE = 3
+        page_limit_second_page = 3
         url_names = {
             reverse(
                 'posts:index'
-            ): PAGE_LIMIT_SECOND_PAGE,
+            ): page_limit_second_page,
             reverse(
                 'posts:group_list',
                 kwargs={'slug': self.group.slug}
-            ): PAGE_LIMIT_SECOND_PAGE,
+            ): page_limit_second_page,
             reverse(
                 'posts:profile',
                 args=[self.user]
-            ): PAGE_LIMIT_SECOND_PAGE,
+            ): page_limit_second_page,
         }
         for value, expected in url_names.items():
             with self.subTest(value=value):
