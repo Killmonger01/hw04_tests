@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import get_object_or_404
 from django.test import Client, TestCase
 from django.urls import reverse
+
 from posts.models import Group, Post, User
 
 
